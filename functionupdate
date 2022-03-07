@@ -1,0 +1,41 @@
+onEvent("signupbsu", "click", function( ) {
+  createRecord(getText("emailinputSU"), {FullName:getText("fullnameinputSU") , Email:getText("emailinputSU") , Password:getText("passwordinputSU"), }, function(record) {
+    
+  });
+  setScreen("login");
+});
+onEvent("signupb", "click", function( ) {
+  setScreen("signup");
+});
+onEvent("loginb", "click", function( ) {
+  readRecords(getText("emailloginb"), {}, function(records) {
+    for (var i =0; i < records.length; i++) {
+      if(records[i].Password == getText("pwloginb")) {
+        setScreen("mainscreen");
+        
+      }else
+      {
+        console.log("Incorrect Email or Password");
+        write("Incorrect Email or Password");
+      }
+    }
+  });
+});
+onEvent("SaveB", "click", function( ) {
+  createRecord(getText("webinput"), {Website:(getText("webinput")) , User:(getText("usernameDI")) , Password:(getText("passwordDI")), }, function(record) {
+    
+  });
+  
+});
+onEvent("searchMS", "click", function( ) {
+  readRecords(getText("webinput2"), {}, function(records) {
+    for (var i =0; i < records.length; i++) {
+      if(records[i].Website == getText("webinput2")) {
+        setText("pwdisplay", (("User: " + getColumn(getText("webinput2"), "User")) + "     ") + ("Password: " + getColumn(getText("webinput2"), "Password")));
+      }else
+      {
+        setText("pwdisplay", "No login information saved for that website.");
+      }
+    }
+  });
+});
